@@ -1,0 +1,32 @@
+# AIR POLLUTION CONFIGURATION FILE
+
+# This is a configuration file that sets up the pipeline 
+# parameters to download NO2 Sentinel data.
+
+
+## PROJECT ##
+# - Project path
+project_dir: '/Users/jeronimoluza/bid/sdv/sentinel/'
+
+product: 'no2/'
+
+incoming_dir: 'incoming/'
+manifest_dir: 'manifest/'
+
+
+processed_dir: 'processed/'
+
+
+## DOWNLOAD DATA ##
+download:
+  ## DOWNLOAD ##
+  # - Date to download info
+  # Days range to download
+  date_str: 2019-01-01
+  date_end: 2019-01-04
+
+  # - Geometry parameters
+  # Polygon to download. In this case it's a square that covers
+  # Latin America. 
+  geom_polygon: "POLYGON((-118.74431424356857 33.29519099709968, -32.442495194157914 33.029582953981816,-34.663495903883884 -54.84876276368805, -120.96531495329452 -54.66568014056442,-118.74431424356857 33.29519099709968, -118.74431424356857 33.29519099709968))"
+
