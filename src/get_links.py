@@ -88,12 +88,15 @@ def _download_csv_link(date_param, geom_param, current_millis, data_dir):
     """
 
     logger.info(f"... Getting {date_param} links...")
-
-    cmd_text = f"""sh scripts/dhusget.sh -u "s5pguest" -p "s5pguest" \
+    #cmd_text = 'cd $HOME/private/projects/SatelliteDataDownloader/'
+    #subprocess.call(cmd_text, shell=True, executable='/bin/bash' )
+    #cmd_text = 'pwd'
+    #subprocess.call(cmd_text, shell=True, executable='/bin/bash' )
+    cmd_text = f"""sh $HOME/private/projects/SatelliteDataDownloader/scripts/dhusget.sh -u "s5pguest" -p "s5pguest" \
     -d "https://s5phub.copernicus.eu/dhus" \
     -l "100" \
     -C "{data_dir}url-list_{date_param}_{current_millis}.csv" \
-    -q "data/raw/OSquery-result.xml" \
+    -q "OSquery-result.xml" \
     -F 'platformname:Sentinel-5 AND producttype:L2__NO2___  AND \
     (beginPosition:[{date_param}T00:00:00.000Z TO {date_param}T23:59:59.999Z] AND \
     endPosition:[{date_param}T00:00:00.000Z TO {date_param}T23:59:59.999Z]) AND \
