@@ -1,0 +1,27 @@
+aiofiles==0.8.0
+aiohttp==3.8.1
+aiosignal==1.2.0
+async-timeout==4.0.2
+attrs==21.4.0
+Bottleneck @ file:///tmp/build/80754af9/bottleneck_1607575130224/work
+certifi==2021.10.8
+cftime @ file:///tmp/build/80754af9/cftime_1638358471540/work
+charset-normalizer==2.0.12
+frozenlist==1.3.0
+idna==3.3
+loguru==0.6.0
+mkl-fft==1.3.0
+mkl-random==1.0.2
+mkl-service==2.3.0
+multidict==6.0.2
+netCDF4==1.5.7
+numexpr @ file:///tmp/build/80754af9/numexpr_1614798502122/work
+numpy @ file:///tmp/build/80754af9/numpy_and_numpy_base_1607448141537/work
+pandas==1.4.1
+python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
+pytz==2021.3
+PyYAML==6.0
+requests==2.27.1
+six @ file:///tmp/build/80754af9/six_1644875935023/work
+urllib3==1.26.9
+yarl==1.7.2
