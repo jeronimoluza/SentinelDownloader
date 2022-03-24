@@ -14,6 +14,7 @@ import logging
 import signal
 import sys
 from src.utils import get_config, get_folder_dir
+from netCDF4 import Dataset
 
 import os
 
@@ -25,17 +26,49 @@ from loguru import logger
 def _get_csv_paths(path_search):
     
     path_list = [os.path.join(path_search, x) for x in os.listdir(path_search) if x.endswith('.csv')]
-        
+    path_list = sorted(path_list, reverse = True)
     return(path_list)
 
-def _read_csv_file(path_csv):
-    logger.debug(f"... CSV from {path_csv}...")
-    data = pd.read_csv(path_csv, header=None) 
-    
-    return(data)
+def _get_ms_month(mfest):
+    date = mfest.split('_')[1]
+    month = date.split('-')[1]
+    return int(month)
 
-def _read_urls(data_dir):
-    paths_csvs = _get_csv_paths(path_search = f"{data_dir}")
+def filter_files_by_machine(files, instance_dict, machine):
+    months_filter = instance_dict[machine]
+    return [file for file in files if _get_ms_month(file) in months_filter]
+
+def _get_csv_paths_parallel(path_search, machine):
+    
+    instance_dict = {
+        1: [1,2,3,4],
+        2: [5,6,7,8],
+        3: [9,10,11,12]
+    }
+    files_list = [x for x in os.listdir(path_search) if x.endswith('.csv')]
+    filtered_files = filter_files_by_machine(files_list, instance_dict, machine)
+    path_list = [os.path.join(path_search, x) for x in filtered_files]
+    path_list = sorted(path_list, reverse = True)
+    return(path_list)
+
+
+def _read_csv_file(path_csv):
+    #logger.debug(f"... CSV from {path_csv}...")
+    try:
+        data = pd.read_csv(path_csv, header=None)
+        return(data)
+    except:
+        logger.debug(f"... No data in file {path_csv} ...")
+    
+    
+
+def _read_urls(data_dir, parallel = False):
+    if parallel:
+        machine = input('Enter machine number (1,2,3)\n')
+        paths_csvs = _get_csv_paths_parallel(path_search = f"{data_dir}", machine = machine)
+    else:
+        paths_csvs = _get_csv_paths(path_search = f"{data_dir}")
+    
     data_lists = list()
     
     for path_csv in paths_csvs:
@@ -131,10 +164,44 @@ def async_run(websites):
     end = time.time()
     print("Took {} seconds to pull {} websites.".format(end - start, len(websites)))
 
+def _downloaded_files(config):
+    processed_dir = get_folder_dir('processed', config)
+    incoming_dir = get_folder_dir('incoming', config)
+    all_downloaded_files = os.listdir(processed_dir) + os.listdir(incoming_dir)
+    return [file for file in all_downloaded_files if file.startswith('S5P_')]
+
+def _check_files_integrity(downloaded_files, config):
+    '''
+    Checks integrity of nc files by opening them
+    Returns
+    -------
+    list :
+        files that are complete and ready for reading'''
+    
+    incoming_dir = get_folder_dir('incoming', config)
+    good = []
+    for file in downloaded_files:
+        try:
+            Dataset(f'{incoming_dir}{file}', 'r')
+            good.append(file)
+        except Exception as e:
+            print(e)
+            #os.remove(f'{incoming_dir}{file}')
+            continue
+    logger.info(f'... {len(good)} DOWNLOADED AND CHECKED FILES ...')
+    return good
+
 def download_data(config):
     manifest_dir = get_folder_dir('manifest', config)
     incoming_dir = get_folder_dir('incoming', config)
-    rutas = _clean_rutas(_read_urls(data_dir = manifest_dir), data_dir = incoming_dir)
+    
+    downloaded_files = _downloaded_files(config)
+    #logger.info(f'--- ALREADY DOWNLOADED FILES: {len(downloaded_files} ---')
+    downloaded_n_checked = _check_files_integrity(downloaded_files, config)
+    urls = _read_urls(data_dir = manifest_dir, parallel = True)
+    
+    urls = urls[~urls['nombre'].isin(downloaded_n_checked)]
+    rutas = _clean_rutas(urls, data_dir = incoming_dir)
     # rutas = rutas_df.iloc[:5]
 
     logger.info("... DOWNLOADING DATA ...")
