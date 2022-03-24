@@ -53,7 +53,7 @@ def _get_csv_paths_parallel(path_search, machine):
 
 
 def _read_csv_file(path_csv):
-    #logger.debug(f"... CSV from {path_csv}...")
+    logger.debug(f"... CSV from {path_csv}...")
     try:
         data = pd.read_csv(path_csv, header=None)
         return(data)
@@ -64,7 +64,7 @@ def _read_csv_file(path_csv):
 
 def _read_urls(data_dir, parallel = False):
     if parallel:
-        machine = input('Enter machine number (1,2,3)\n')
+        machine = int(input('Enter machine number (1,2,3)\n'))
         paths_csvs = _get_csv_paths_parallel(path_search = f"{data_dir}", machine = machine)
     else:
         paths_csvs = _get_csv_paths(path_search = f"{data_dir}")
