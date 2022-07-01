@@ -1,0 +1,6 @@
+dest/
+*.xml
+*.log
+product_list
+LICENSE
+__pycache__
