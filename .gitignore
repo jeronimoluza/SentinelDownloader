@@ -4,3 +4,4 @@ dest/
 product_list
 LICENSE
 __pycache__
+.DS_Store
