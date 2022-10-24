@@ -2,4 +2,5 @@
 manifests
 downloads
 *.csv
+*.xml
 __pycache__/
