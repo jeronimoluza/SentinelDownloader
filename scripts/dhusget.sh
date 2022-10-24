@@ -816,11 +816,6 @@ if [ -z $NAMEFILERESULTS ];then
         export NAMEFILERESULTS="OSquery-result.xml"
 fi
 /bin/rm -f $NAMEFILERESULTS
-echo ${WC}
-echo ${AUTH}
-echo ${TRIES}
-echo ${NAMEFILERESULTS}
-echo ${QUERY_STATEMENT}
 ${WC} ${AUTH} ${TRIES} -c -O "${NAMEFILERESULTS}" "${QUERY_STATEMENT}"
 LASTDATE=`date -u +%Y-%m-%dT%H:%M:%S.%NZ`
 sleep 5

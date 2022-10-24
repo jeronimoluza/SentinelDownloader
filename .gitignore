@@ -1,7 +1,5 @@
-dest/
-*.xml
-*.log
-product_list
-LICENSE
-__pycache__
 .DS_Store
+manifests
+downloads
+*.csv
+__pycache__/
