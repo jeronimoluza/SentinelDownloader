@@ -1,5 +1,5 @@
 from .bashquery import BashQuery
-from .utils import assertDirectory, check_manifests, GetDownloadedFiles, LoadManifestsDF
+from .utils import get_config, GetDateRange, assertDirectory, check_manifests, GetDownloadedFiles, WKTtoGDF, LoadManifestsDF
 from .asynciodownloader import async_run
 from loguru import logger
 import asyncio
@@ -9,11 +9,13 @@ from typing import Optional, Union
 from pandas import DataFrame
 from geopandas import GeoDataFrame, GeoSeries
 import os
+import yaml
 
 __all__ = [
     'download_manifests',
     'download_data',
-    'download_file'
+    'download_file',
+    'config_run'
 ]
 
 def download_manifests(
@@ -24,7 +26,7 @@ def download_manifests(
     dates: list,
     geom: Union[GeoDataFrame, GeoSeries, Polygon, MultiPolygon],
     verbose = False,
-    processingmode: str = 'Offline',
+    processingmode: str = 'NT',
     username: str = 's5pguest',
     password: str = 's5pguest'):
 
@@ -59,9 +61,8 @@ def download_data(
     semaphore: int = 5,
     username: str = 's5pguest',
     password: str = 's5pguest',
-    attempts_limit = 30,
-    queue = None
-):
+    attempts_limit = 30
+    ):
     
     assertDirectory(manifests_dir)
     manifests_dir = os.path.join(manifests_dir, pipeline_name)
@@ -84,7 +85,7 @@ def download_data(
     logger.info(f'DOWNLOADING {len(targets)} FILES\nCONCURRENT DOWNLOADS LIMITED TO {semaphore}.')
 
     sem = asyncio.Semaphore(semaphore)
-    async_run(username, password, sem, targets, attempts_limit, queue)
+    async_run(username, password, sem, targets, attempts_limit)
     logger.info('DONE DOWNLOADING')
 
 
@@ -120,4 +121,53 @@ def download_file(
 
     sem = asyncio.Semaphore(semaphore)
     async_run(username, password, sem, targets, attempts_limit)
-    logger.info('DONE DOWNLOADING')
+
+def config_run(
+    config_path
+):
+    logger.info(f'READING CONFIG FROM {config_path}')
+    config = get_config(config_path)
+    pipeline_name = config['pipeline_name']
+    manifests_dir = config['manifests_dir']
+    downloads_dir = config['downloads_dir']
+    platformname = config['platformname']
+    product = config['product']
+    start_date = config['start_date']
+    end_date = config['end_date']
+    geom_wkt = config['geom_wkt']
+    verbose = config['verbose']
+    processingmode = config['processingmode']
+    semaphore = config['semaphore']
+    username = config['username']
+    password = config['password']
+    attempts_limit = config['attempts_limit']
+    
+    geom = WKTtoGDF(geom_wkt)
+
+    dates = GetDateRange(
+            start = start_date,
+            end = end_date
+            )
+
+    download_manifests(
+        pipeline_name = pipeline_name,
+        manifests_dir = manifests_dir,
+        platformname = platformname,
+        product = product,
+        dates = dates,
+        geom = geom,
+        verbose = verbose,
+        processingmode = processingmode,
+        username = username,
+        password = password
+        )
+
+    download_data(
+        pipeline_name = pipeline_name,
+        manifests_dir = manifests_dir,
+        downloads_dir = downloads_dir,
+        semaphore = semaphore,
+        username = username,
+        password = password,
+        attempts_limit = attempts_limit
+        )

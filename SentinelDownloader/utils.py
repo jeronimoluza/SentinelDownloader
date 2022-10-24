@@ -3,8 +3,10 @@ import geopandas as gpd
 import pandas as pd
 from shapely import wkt
 from loguru import logger
+import yaml
 
 __all__ = [
+    'get_config',
     'WKTtoGDF',
     'GetFileFromPath',
     'GetDateRange',
@@ -15,6 +17,21 @@ __all__ = [
     'check_manifests',
     'clean_dirs'
 ]
+
+def get_config(path):
+    """Load configuration file
+    Parameters
+    ----------
+    path : str
+        config path
+    Returns
+    -------
+    dict
+        variables from config.yaml
+    """
+
+    config = yaml.load(open(path), Loader=yaml.SafeLoader)
+    return config
 
 def WKTtoGDF(geom_wkt: str):
     return gpd.GeoDataFrame([wkt.loads(geom_wkt)], columns = ['geometry'])
