@@ -30,21 +30,21 @@ There are 3 ways you can use this package:
   python run.py download_data --pipeline_name 'buenosaires' --manifests_dir 'manifests' --downloads_dir 'downloads' --username 's5pguest' --password 's5pguest'
   ```
 ## Parameters explanation
-### **```start_date``` & ```end_date```:**
+#### **```start_date``` & ```end_date```:**
 Parameters for setting the time window for retrieving the files.
-### **```pipeline_name```:**
+#### **```pipeline_name```:**
 Name for the folder containing the files for that 'run'.
-### **```manifests_dir```:**
+#### **```manifests_dir```:**
 Name for the folder inside ```pipeline_name/``` for storing the manifests.
-### **```downloads_dir```:**
+#### **```downloads_dir```:**
 Name for the folder inside ```pipeline_name/``` for storing the satellite products. 
-### **```platformname```:**
+#### **```platformname```:**
 Specifies the Satellite Platform name. Must be in the following:
 - ```Sentinel-1```
 - ```Sentinel-2```
 - ```Sentinel-3```
 - ```Sentinel-5```
-### **```product```:**
+#### **```product```:**
 Specifies the product type for that Satellite Platform. Available products for each satellite:
 | Mission               | Product type |
 | ---------             | :-----------: |
@@ -54,12 +54,12 @@ Specifies the product type for that Satellite Platform. Available products for e
 | Sentinel-5            | L1B_IR_SIR, L1B_IR_UVN, L1B_RA_BD1, L1B_RA_BD2, L1B_RA_BD3, L1B_RA_BD4, L1B_RA_BD5, L1B_RA_BD6, L1B_RA_BD7, L1B_RA_BD8, L2__AER_AI, L2__AER_LH, L2__CH4, L2__CLOUD_, L2__CO____, L2__HCHO__, L2__NO2___, L2__NP_BD3, L2__NP_BD6, L2__NP_BD7, L2__O3_TCL, L2__O3____, L2__SO2___, AUX_CTMFCT, AUX_CTMANA |
 ### **```geom_wkt```:**
 Well-known text (WKT) representation of the polygon representing the area of interest.
-### **```verbose```:**
+#### **```verbose```:**
 Verbosite of the _dhusget_ script provided by Copernicus. Set True for full verbosity, False for a silent execution.
-### **```processingmode```:**
+#### **```processingmode```:**
 Parameter for specifying the timeliness of the products:
 - Set ```processingmode = 'NR'``` for Near Real-Time products.
 - Set ```processingmode = 'NT'``` for Non-Time Critical products.
-### **```username``` & ```password```:**
+#### **```username``` & ```password```:**
 For authentication, you can use _s5pguest_ as the username and the password **ONLY** if you are trying to download data products from **Sentinel-5P**.
 If you want to download data from previous Sentinel missions, you should create an account at https://scihub.copernicus.eu/dhus/#/self-registration.
