@@ -3,7 +3,7 @@ import os
 import SentinelDownloader
 os.system('rm -r $HOME/dhusget_tmp')
 
-class S5PDownloader(object):
+class sentineldownloader(object):
         """Class for Fire CLI operation."""
 
 
@@ -79,4 +79,4 @@ class S5PDownloader(object):
                 SentinelDownloader.download.config_run(config_path)
 
 if __name__ == '__main__':
-        fire.Fire(S5PDownloader)
+        fire.Fire(sentineldownloader)
