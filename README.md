@@ -52,7 +52,7 @@ Specifies the product type for that Satellite Platform. Available products for e
 | Sentinel-2            | S2MSI2A,S2MSI1C, S2MS2Ap |
 | Sentinel-3            | SR_1_SRA___, SR_1_SRA_A, SR_1_SRA_BS, SR_2_LAN___, OL_1_EFR___, OL_1_ERR___, OL_2_LFR___, OL_2_LRR___, SL_1_RBT___, SL_2_LST___, SY_2_SYN___, SY_2_V10___, SY_2_VG1___, SY_2_VGP___, SY_2_AOD__, SL_2_FRP__ |
 | Sentinel-5            | L1B_IR_SIR, L1B_IR_UVN, L1B_RA_BD1, L1B_RA_BD2, L1B_RA_BD3, L1B_RA_BD4, L1B_RA_BD5, L1B_RA_BD6, L1B_RA_BD7, L1B_RA_BD8, L2__AER_AI, L2__AER_LH, L2__CH4, L2__CLOUD_, L2__CO____, L2__HCHO__, L2__NO2___, L2__NP_BD3, L2__NP_BD6, L2__NP_BD7, L2__O3_TCL, L2__O3____, L2__SO2___, AUX_CTMFCT, AUX_CTMANA |
-### **```geom_wkt```:**
+#### **```geom_wkt```:**
 Well-known text (WKT) representation of the polygon representing the area of interest.
 #### **```verbose```:**
 Verbosite of the _dhusget_ script provided by Copernicus. Set True for full verbosity, False for a silent execution.
