@@ -65,3 +65,12 @@ Parameter for specifying the timeliness of the products:
 #### **```username``` & ```password```:**
 For authentication, you can use _s5pguest_ as the username and the password **ONLY** if you are trying to download data products from **Sentinel-5P**.
 If you want to download data from previous Sentinel missions, you should create an account at https://scihub.copernicus.eu/dhus/#/self-registration.
+
+
+## License
+
+Copyright © 2020. Banco Interamericano de Desarrollo ("BID"). Uso autorizado. [AM-331-A3](/LICENSE.md)
+
+## Author
+
+SentinelDownloader was developed by Jerónimo Luza (jeronimol at iadb.org).
