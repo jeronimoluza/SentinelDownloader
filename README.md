@@ -7,7 +7,19 @@ SentinelDownloader is an open source project to automatically download Sentinel-
 
 Once parameters have been specified, SentinelDownloader uses the [dhusget script](https://scihub.copernicus.eu/twiki/do/view/SciHubUserGuide/BatchScripting#dhusget_script) provided by Copernicus to first retrieve what are know as the _manifests_ - CSVs files that contain the URLs pointing to the locations of the requested products. After the manifests have been downloaded and read, the library asynchronously downloads the ordered files using AsyncIO, AIOfiles and AIOhttp.
 
+## Environment
+
+Create the environment to use SentinelDownloader with
+```bash 
+make create
+```
+To remove the environment, do
+```bash 
+make remove
+```
+
 ## Usage
+
 There are 3 ways you can use this package:
 
 - ### Standard Python Library
