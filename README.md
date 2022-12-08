@@ -38,7 +38,7 @@ There are 3 ways you can use this package:
 - ### Command-line interface (CLI)
     You can run both package functions using the Fire CLI as shown below
   ```bash
-  python run.py download_manifests --start_date '2022-09-01' --end_date '2022-09-05' --pipeline_name 'buenosaires'         --manifests_dir 'manifests' --platformname 'Sentinel-5' --product 'L2__NO2___' --geom_wkt 'POLYGON((-61.2736 -32.3028, -54.0606 -32.3028, -54.0606 -35.8176, -61.2736 -35.8176, -61.2736 -32.3028))'         --verbose True --processingmode 'NT' --username 's5pguest' --password 's5pguest'
+  python run.py download_manifests --start_date '2022-09-01' --end_date '2022-09-05' --pipeline_name 'buenosaires' --manifests_dir 'manifests' --platformname 'Sentinel-5' --product 'L2__NO2___' --geom_wkt 'POLYGON((-61.2736 -32.3028, -54.0606 -32.3028, -54.0606 -35.8176, -61.2736 -35.8176, -61.2736 -32.3028))'         --verbose True --processingmode 'NT' --username 's5pguest' --password 's5pguest'
   ```
   ```bash
   python run.py download_data --pipeline_name 'buenosaires' --manifests_dir 'manifests' --downloads_dir 'downloads' --username 's5pguest' --password 's5pguest'
