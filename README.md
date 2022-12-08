@@ -85,4 +85,6 @@ Copyright © 2020. Banco Interamericano de Desarrollo ("BID"). Uso autorizado. [
 
 ## Author
 
-SentinelDownloader was developed by Jerónimo Luza (jeronimol at iadb.org).
+SentinelDownloader was developed by:
+- Jerónimo Luza (jeronimol at iadb.org)
+- Santiago Inmediato (santiagoi at iadb.org)
