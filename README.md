@@ -5,6 +5,8 @@
 ## Description
 SentinelDownloader is an open source project to automatically download Sentinel-1, Sentinel-2, Sentinel-3 and Sentinel-5P user products (see available products below) from the [Copernicus Open Access Hub](https://scihub.copernicus.eu/) in an asynchronous fashion.
 
+This package was developed as part of a project by the Inter-American Development Bank's Office of Strategic Planning and Development Effectiveness (SPD) to facilitate the use of satellite data to improve the development effectiveness of IDB projects.
+
 Once parameters have been specified, SentinelDownloader uses the [dhusget script](https://scihub.copernicus.eu/twiki/do/view/SciHubUserGuide/BatchScripting#dhusget_script) provided by Copernicus to first retrieve what are know as the _manifests_ - CSVs files that contain the URLs pointing to the locations of the requested products. After the manifests have been downloaded and read, the library asynchronously downloads the ordered files using AsyncIO, AIOfiles and AIOhttp.
 
 ## Environment
