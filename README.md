@@ -83,7 +83,7 @@ If you want to download data from previous Sentinel missions, you should create 
 
 Copyright © 2020. Banco Interamericano de Desarrollo ("BID"). Uso autorizado. [AM-331-A3](/LICENSE.md)
 
-## Author
+## Authors
 
 SentinelDownloader was developed by:
 - Jerónimo Luza (jeronimol at iadb.org)
