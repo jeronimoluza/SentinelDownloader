@@ -49,7 +49,7 @@ def GetDateRange(start: str , end: str) -> list:
     Returns:
         list: list of dates in YYYY-mm-dd format.
     """
-    dates_range = pd.date_range(start, end).tolist()
+    dates_range = pd.date_range(start, end, datefirst = True).tolist()
     return [date.date().strftime('%Y-%m-%d') for date in dates_range]
 
 def GetTimeWindow(
