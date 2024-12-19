@@ -1,14 +1,7 @@
-pipeline_name: pipeline_name
-manifests_dir: manifests
-downloads_dir: downloads
-platformname: Sentinel-5
-product: 'L2__NO2___'
+collection_name: SENTINEL-5P # One of [SENTINEL-1, SENTINEL-2, SENTINEL-3, SENTINEL-4, SENTINEL-5P, SENTINEL-6, SENTINEL-1-RTC]
+string_match: 'L2__NO2___'
 start_date: '2022-10-01'
 end_date: '2022-10-05'
 geom_wkt: 'POLYGON((-61.2736 -32.3028, -54.0606 -32.3028, -54.0606 -35.8176, -61.2736 -35.8176, -61.2736 -32.3028))'
-verbose: True
-processingmode: 'NT'
-semaphore: 5
-username: s5pguest
-password: s5pguest
-attempts_limit: 30
+username: username
+password: password

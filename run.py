@@ -1,82 +1,31 @@
-import fire
-import os
 import SentinelDownloader
-os.system('rm -r $HOME/dhusget_tmp')
-
-class sentineldownloader(object):
-        """Class for Fire CLI operation."""
+from SentinelDownloader import utils
 
 
-        def download_manifests(
-                self,
-                start_date,
-                end_date,
-                pipeline_name,
-                manifests_dir,
-                platformname,
-                product,
-                geom_wkt,
-                verbose,
-                processingmode,
-                username,
-                password
-        ):      
-                dates = SentinelDownloader.utils.GetDateRange(
-                        start = start_date,
-                        end = end_date
-                        )
+def download(destination_folder, s5p_product, polygon_wkt, start_date, end_date):
+    """
+    This function downloads Sentinel-5P data based on the provided parameters.
 
-                geom = SentinelDownloader.utils.WKTtoGDF(geom_wkt)
+    Args:
+        destination_folder (str): The path to the folder where the downloaded data will be stored.
+        s5p_product (str): The name of the Sentinel-5P product.
+        polygon_wkt (str): The Well-Known Text (WKT) representation of the polygon within which the data will be downloaded.
+        start_date (str): The start date of the date range in the format 'YYYY-MM-DD'.
+        end_date (str): The end date of the date range in the format 'YYYY-MM-DD'.
 
-                SentinelDownloader.download.download_manifests(
-                        pipeline_name = pipeline_name,
-                        manifests_dir = manifests_dir,
-                        platformname = platformname,
-                        product = product,
-                        dates = dates,
-                        geom = geom,
-                        verbose = True,
-                        processingmode = 'NT',
-                        username = username,
-                        password = password
-                        )
-
-        def download_data(
-                self,
-                pipeline_name,
-                manifests_dir,
-                downloads_dir,
-                username,
-                password,
-                semaphore = 5,
-                attempts_limit = 30
-        ):
-                """_summary_
-
-                Args:
-                    pipeline_name (_type_): _description_
-                    manifests_dir (_type_): _description_
-                    downloads_dir (_type_): _description_
-                    username (_type_): _description_
-                    password (_type_): _description_
-                    semaphore (int, optional): _description_. Defaults to 5.
-                    attempts_limit (int, optional): _description_. Defaults to 30.
-                """
-                SentinelDownloader.download.download_data(
-                        pipeline_name = pipeline_name,
-                        manifests_dir = manifests_dir,
-                        downloads_dir = downloads_dir,
-                        semaphore = semaphore,
-                        username = username,
-                        password = password,
-                        attempts_limit = attempts_limit
-                        )
-        
-        def config_run(
-                self,
-                config_path
-        ):
-                SentinelDownloader.download.config_run(config_path)
-
-if __name__ == '__main__':
-        fire.Fire(sentineldownloader)
+    Returns:
+        None
+    """
+    config = utils.get_config("configs/config.yaml")
+    access_token, refresh_token = SentinelDownloader.token_security.get_access_token(
+        config["username"], config["password"]
+    )
+    manifests = download(
+        destination_folder,
+        s5p_product,
+        polygon_wkt,
+        start_date,
+        end_date,
+        access_token,
+        refresh_token,
+    )
